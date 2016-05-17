@@ -48,10 +48,19 @@ class JungleTest < Minitest::Test
     list = LinkedList.new
     node = Node.new("doop")
     list.append(node)
-    binding.pry
     list.to_string(node)
 
     assert_equal "doop", list.to_string(node)
+ end
+
+ def test_list_append_multiple
+   list = LinkedList.new
+   node = Node.new("doop")
+   list.append(node)
+   list.append(node)
+
+   binding.pry
+   assert_equal "doop deep", list.to_string(node)
  end
 
 end
