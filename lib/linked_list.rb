@@ -1,7 +1,7 @@
 require_relative "node"
 
 class LinkedList
-  attr_reader :head, :remaining_data, :current
+  attr_reader :head, :current
   def initialize(head = nil)
     @head = head
     @current = @head
@@ -104,5 +104,4 @@ class LinkedList
     string << @current.data
     string.join(' ')
   end
-
 end

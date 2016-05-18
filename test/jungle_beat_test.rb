@@ -3,6 +3,7 @@ require 'minitest/pride'
 require 'pry'
 require_relative '../lib/linked_list'
 require_relative '../lib/node'
+require_relative '../lib/JungleBeat'
 
 
 class JungleTest < Minitest::Test
@@ -78,7 +79,7 @@ class JungleTest < Minitest::Test
   end
 
   def test_shit
-    skip
+
     list = LinkedList.new
     list.append("dunk the monkey")
     binding.pry
@@ -123,8 +124,26 @@ class JungleTest < Minitest::Test
     list.append("deep woo shi shu blop")
     list.find(2,1)
     list.find(1,3)
-    binding.pry
+
     assert_equal "shi", list.find(2,1)
     assert_equal "woo shi shu", list.find(1,3)
+  end
+
+  def test_includes?
+    list = LinkedList.new
+    list.append("deep woo shi shu blop")
+    list.includes?("deep")
+    list.includes?("dep")
+    assert list.includes?("deep")
+    refute list.includes?("dep")
+  end
+
+  def test_pop_returns_last_and_removes_from
+    list = LinkedList.new
+    list.append("deep woo shi shu blop")
+    list.pop
+    list.pop
+    list.to_string
+    assert_equal "deep woo shi", list.to_string
   end
 end
