@@ -82,7 +82,7 @@ class JungleTest < Minitest::Test
 
     list = LinkedList.new
     list.append("dunk the monkey")
-    binding.pry
+
     puts "----"
   end
 
@@ -108,14 +108,19 @@ class JungleTest < Minitest::Test
   end
 
   def test_insert_to_string
-
     list = LinkedList.new
-    list.append("plop")
+    list.append("plop dope nope")
     list.append("suu")
     list.prepend("dop")
-    list.insert(1, "woo")
-    list.to_string
-    assert_equal "dop woo plop suu", list.to_string
+    list.insert(2, "woo")
+    assert_equal "dop plop woo dope nope suu", list.to_string
+    binding.pry
+    list.insert(0,"fuck this game")
+    assert_equal "fuck this game dop plop woo dope nope suu", list.to_string
+    list.insert(5, "this is a string")
+    assert_equal "fuck this game dop plop this is a string woo dope nope suu", list.to_string
+    list.insert(500, "whhops")
+    assert_equal "Invalid insert", list.insert(500, "whhops")
   end
 
   def test_find
@@ -147,7 +152,7 @@ class JungleTest < Minitest::Test
     assert_equal "deep woo shi", list.to_string
   end
 
-  def test_JungleBeat_wrapper_methods
+  def test_JungleBeat_wrapper_append_access
     jb = JungleBeat.new
     jb.list
     jb.list.head
@@ -155,15 +160,14 @@ class JungleTest < Minitest::Test
     jb.append("deep doo ditt")
     assert_equal "deep doo ditt", jb.list.to_string
     assert_equal "deep", jb.list.head.data
-# => "deep"
-# > jb.list.head.next_node.data
-# => "doo"
-# > jb.append("woo hoo shu")
-# => "woo hoo shu"
-# > jb.count
-# 6
- binding.pry
+    assert_equal "doo", jb.list.head.next_node.data
+    jb.append("woo hoo shu")
+    assert_equal "deep doo ditt woo hoo shu", jb.list.to_string
 
+    assert_equal 6, jb.count
+  end
+
+  def test_speed_and_voice
 
 
   end

@@ -4,7 +4,6 @@ class LinkedList
   attr_accessor :head, :current
   def initialize(head = nil)
     @head = head
-    @current = current
   end
 
   def head_create(data)
@@ -15,7 +14,6 @@ class LinkedList
 
   def add_node_not_head(data)
     data = data.split[0]
-    # go to the last node and add it to next node
     current = head
     until current.next_node == nil
       current = current.next_node
@@ -31,39 +29,45 @@ class LinkedList
       add_node_not_head(data)
       @current = current.next_node
     end
-    remaining_data = data.split[1..-1]
-    remaining_data.each do |x|
-      @current.next_node = Node.new(x)
-      @current = current.next_node
-    end
+    loop_append_prepend(data)
   end
-
 
   def prepend(data)
     temp = head
     head_create(data)
     @current = head
-    remaining_data = data.split[1..-1]
-    remaining_data.each do |x|
-      @current.next_node = Node.new(x)
-      @current = current.next_node
-    end
-
+    loop_append_prepend(data)
     old_data = to_string
     @current = head
-    remaining_data = old_data.split[1..-1]
-    remaining_data.each do |x|
-      @current.next_node = Node.new(x)
-      @current = current.next_node
-    end
+    loop_append_prepend(old_data)
     @current.next_node = temp
   end
 
-  def insert(index, data)
-    return "Oops nothing to insert into" if head == nil
-    new_data = to_string.split.insert(index, data).join(' ')
-    @head = nil
-    prepend(new_data)
+  def loop_append_prepend(data)
+    remaining_data = data.split[1..-1]
+    remaining_data.each { |x| @current.next_node = Node.new(x); @current = current.next_node }
+  end
+
+  def loop_insert(data)
+    remaining_data = data.split[0..-1]
+    remaining_data.each { |x| @current.next_node = Node.new(x); @current = current.next_node }
+  end
+
+  def insert(num, data)
+    if num == 0
+      prepend(data)
+    elsif num == count
+      append(data)
+    elsif num > count
+      "Invalid insert"
+    else
+      @current = head
+      num = num - 1
+      1.upto(num) { @current = current.next_node }
+      temp = current.next_node
+      loop_insert(data)
+      current.next_node = temp
+    end
   end
 
   def find(index,addition)
@@ -78,32 +82,50 @@ class LinkedList
 
   def includes?(str)
     return "Oops no items" if head == nil
-    to_string.split.include?(str)
+    current = head
+    while current
+      return true if str == current.data
+      current = current.next_node
+    end
   end
 
   def pop
-    return "Oops no items" if head == nil
-    last_item = to_string.split.pop
-    new_data = to_string.split
-    new_data.delete_at(-1)
-    @head = nil
-    new_data == [] ? @head = nil : append(new_data.join(' '))
-    last_item
+    if head == nil
+       "Oops no items"
+    elsif @head.next_node == nil
+      temp = head.data
+      @head = nil
+      temp
+    else
+    current = head
+    while current.next_node.next_node
+      current = current.next_node
+    end
+    temp = current.next_node.data
+    current.next_node = nil
+    temp
+  end
+
   end
 
   def count
-    to_string.split.count
+    current = @head
+    count = 1
+    while current.next_node
+      current = current.next_node
+      count += 1
+    end
+    count
   end
 
   def to_string
-    string = []
+    sounds = []
     current = head
-    while current.next_node != nil
-      string << current.data
+    while current.next_node
+      sounds << current.data
       current = current.next_node
     end
-
-    string << current.data
-    string.join(' ')
+    sounds << current.data
+    sounds.join(' ')
   end
 end
