@@ -8,21 +8,25 @@ require_relative '../lib/node'
 class JungleTest < Minitest::Test
 
   def test_node_data_equals_plop
+      skip
       node = Node.new("plop")
       assert_equal "plop", node.data
   end
 
   def test_next_node_nil_for_last_node
+     skip
       node = Node.new("plop")
       assert_nil node.next_node
   end
 
   def test_node_head_nil
+      skip
       list = LinkedList.new
       assert_nil list.head
   end
 
   def test_append_sound
+      skip
       list = LinkedList.new
       data = "doop"
       list.append(data)
@@ -30,6 +34,7 @@ class JungleTest < Minitest::Test
   end
 
   def test_list_head_next_node_is_nil
+    skip
     list = LinkedList.new
     data = "doop"
     list.append(data)
@@ -37,7 +42,7 @@ class JungleTest < Minitest::Test
   end
 
   def test_list_count
-
+    skip
     list = LinkedList.new
     data = "doop"
     list.append(data)
@@ -46,7 +51,7 @@ class JungleTest < Minitest::Test
     assert_equal 1 , list.count
   end
   def test_list_to_string
-
+      skip
     list = LinkedList.new
     data = "doop"
     list.append(data)
@@ -56,7 +61,7 @@ class JungleTest < Minitest::Test
  end
 
  def test_list_append_multiple
-
+   skip
    list = LinkedList.new
    data = "doop deep"
 
@@ -70,6 +75,7 @@ class JungleTest < Minitest::Test
  end
 
  def test_list_prepend
+   skip
    list = LinkedList.new
    list.head_create("dang")
    data = "dimp dumb dog blam"
