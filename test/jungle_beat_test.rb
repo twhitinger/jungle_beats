@@ -165,9 +165,4 @@ class JungleTest < Minitest::Test
 
     assert_equal 6, jb.count
   end
-
-  def test_speed_and_voice
-
-
-  end
 end
