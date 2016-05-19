@@ -114,7 +114,6 @@ class JungleTest < Minitest::Test
     list.prepend("dop")
     list.insert(2, "woo")
     assert_equal "dop plop woo dope nope suu", list.to_string
-    binding.pry
     list.insert(0,"fuck this game")
     assert_equal "fuck this game dop plop woo dope nope suu", list.to_string
     list.insert(5, "this is a string")
